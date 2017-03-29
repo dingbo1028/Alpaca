@@ -42,6 +42,7 @@ class Router
                 $tmp = explode('=',$item);
                 $array[$tmp[0]]=$tmp[1];
             }
+            var_dump($array);
             if (isset($array['module'])){
                 $this->route_url['module']=$array['module'];
                 unset($array['module']);
@@ -54,18 +55,21 @@ class Router
                 $this->route_url['action']=$array['action'];
                 unset($array['action']);
             }
+
             if (isset($this->route_url['action'])&& strpos($this->route_url['action'],'.')){
                 if (explode('.',$this->route_url['action'])[1]!=Config::get('url_html_suffix')){
                     exit('Suffix error');
                 }else{
                     $this->route_url['action']=explode('.',$this->route_url['action'])[0];
                 }
-            }else{
-                $this->route_url= [];
             }
+        }else{
+            $this->route_url= [];
         }
     }
     public function pathinfoToArray(){
+
+        $this->url_query['path']=strstr($this->url_query['path'],'index.php');
         $arr = !empty($this->url_query['path']) ? explode('/',$this->url_query['path']) : [];
         if (count($arr) > 0) {
             if ($arr[1] == 'index.php') {   //以 'localhost:8080/index.php'开始

@@ -11,5 +11,5 @@ $loader->addNamespace('core', ROOT_PATH.'sys'.DS.'core');
 $loader->addNamespace('home',APP_PATH.'home');
 $loader->register();
 
-//\core\Config::set(include CONF_PATH.'config.php');
+\core\Config::set(include CONF_PATH.'config.php');
 
