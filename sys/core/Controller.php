@@ -2,9 +2,10 @@
 
 namespace core;
 use core\View;
-
+use core\traits\Jump;
 class Controller
 {
+    use Jump;
     protected $vars=[];
     protected $tpl;
 

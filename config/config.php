@@ -1,7 +1,7 @@
 <?php
 return [
     //Database Config
-    'db_host'       =>  '172.0.0.1',
+    'db_host'       =>  'localhost',
     'db_user'       =>  'root',
     'db_pwd'        =>  'bnuz',
     'db_name'       =>  'Alpaca',
@@ -29,7 +29,7 @@ return [
     'view_path'     =>APP_PATH.'home'.DS.'View'.DS,
     'view_suffix'   =>'.php',
 
-    'auto_cache'    =>true,
+    'auto_cache'    =>false,
     'url_html_suffix'=>'html',
 
     //Your Config

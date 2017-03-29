@@ -11,7 +11,7 @@ class Model
     function __construct($table='')
     {
         $this->db = new PDO('mysql:host='.Config::get('db_host').';dbname='.Config::get('db_name').';charset='.Config::get('db_charset'),Config::get('db_user'),Config::get('db_pwd'));
-        $this->table=Config::get('db_table_prefix'.$table);
+        $this->table=Config::get('db_table_prefix').$table;
     }
     public function getFields(){
         $sql='SHOW COLUMNS FORM `'.$this->table.'`';
@@ -43,7 +43,7 @@ class Model
         }
         return $info;
     }
-    protected function free(){
+    public function free(){
         $this->db=null;
     }
     //獲取客戶端真實IP地址
@@ -124,7 +124,10 @@ class Model
             $where .= $key.' '.$options." '$value',";
         }
         $where = substr($where,0,strlen($where)-1);
-        $sql='SELECT '.$field.' FROM '.$this->table.' WHERE '.$where;
+        $sql='SELECT '.$field.' FROM '.$this->table;
+        if ($where=''){
+            $sql.=' WHERE '.$where;
+        }
         $pdo = $this->db->query($sql);
         if ($pdo){
             $result = $pdo->fetchAll(PDO::FETCH_ASSOC);
@@ -134,15 +137,21 @@ class Model
             return false;
         }
     }
-    public function delete($wheres=[],$options='and'){
+    public function delete($wheres=[],$options='='){
         $where='';
-        foreach ($wheres as $key=>$val) {
-            $where.=$key.' '.$options." '$val',";
+        if (is_array($wheres)){
+            foreach ($wheres as $key=>$val) {
+                $where.=$key.' '.$options." '$val',";
+            }
+            $where = substr($where,0,strlen($where)-1);
+        }else{
+            $where=$wheres;
         }
-        $where = substr($where,0,strlen($where)-1);
+
         $sql = "DELETE FROM ".$this->table." WHERE ".$where;
         $pdo = $this->db->query($sql);
         if ($pdo){
+            $this->log_error('delete error', $sql);
             return true;
         }else{
             $this->log_error('delete error', $sql);
