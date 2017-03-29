@@ -20,8 +20,8 @@ class View
         if (!file_exists($tpl_file)){
             exit('Template file does not exist');
         }
-        $parser_file = Config::get('compile_path').md5($file).$file.'php';
-        $cache_file = Config::get('cache_path').Config::get('cache_prefix').$file.'html';
+        $parser_file = Config::get('compile_path').md5($file).$file.'.php';
+        $cache_file = Config::get('cache_path').Config::get('cache_prefix').$file.'.html';
         if (Config::get('auto_cache')){
             if (file_exists($cache_file) && file_exists($parser_file)) {
                 if (filemtime($cache_file) >= filemtime($parser_file) && filemtime($parser_file) >= filemtime($tpl_file)) {

@@ -25,6 +25,10 @@ return [
     'cache_prefix'  =>'cache_',
     'cache_type'    =>'file',
     'compile_path'  =>RUNTIME_PATH.'compile'.DS,
+
+    'view_path'     =>APP_PATH.'home'.DS.'View'.DS,
+    'view_suffix'   =>'.php',
+
     'auto_cache'    =>true,
     'url_html_suffix'=>'html',
 

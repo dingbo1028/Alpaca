@@ -17,10 +17,15 @@ class Controller
         }
     }
 
-    final protected function setTpl($tpl=''){
+    final public function setTpl($tpl=''){
         $this->tpl=$tpl;
     }
-    final protected function display(){
+    final protected function display($tql = ''){
+        if ($tql=''){
+
+        }else{
+
+        }
         $view = new View($this->vars);
         $view->display($this->tpl);
     }

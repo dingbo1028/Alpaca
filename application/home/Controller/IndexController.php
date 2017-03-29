@@ -1,12 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Dingbo
- * Date: 2017-03-28
- * Time: 22:23
- */
-class IndexController{
-    public static function Index(){
-        echo "jinru!!!!";
+namespace home\controller;
+use core\Controller;
+
+class IndexController extends Controller{
+    public function index(){
+        $this->assign('name','Hello, Alpaca!');
+        $this->display();
     }
 }

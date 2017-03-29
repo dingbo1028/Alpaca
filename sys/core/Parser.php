@@ -23,11 +23,12 @@ class Parser
         $patter ='/\{\$([\w]+)\}/';
         $repVar = preg_match($patter,$this->content);
         if ($repVar){
-            $this->content=preg_replace($patter,"<?php echo \$this->vars[$1];?>",$this->content);
+            $this->content=preg_replace($patter,"<?php echo \$this->vars['$1'];?>",$this->content);
         }
     }
 
-    private function compile($parser_file){
+    public function compile($parser_file){
         $this->parVar();
         file_put_contents($parser_file,$this->content);
-    }}
+    }
+}

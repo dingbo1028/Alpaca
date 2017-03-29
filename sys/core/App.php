@@ -46,8 +46,10 @@ class App
             //echo $className;
             $controller = new $className;
             if (method_exists($controller,$action)){
-                //$controller->setTql($action);
-                $controller->$action;
+                $controller->setTpl($action);
+                $controller->$action();
+            }else{
+                die('The method does not exist');
             }
         }else{
             die('The Controller doew not exist!');
